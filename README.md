@@ -61,9 +61,10 @@ See setting menu info panels for full details
 
 -   Previews
     -   Frame Rate
-    -   Automatic Hiding
+    -   Preview Hiding
         -   Hide previews for inactive source applications
         -   Hide preview for focused source window
+        -   Toggle hiding all previews
 -   Windows
     -   Appearance
         -   Opacity
