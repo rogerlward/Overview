@@ -74,7 +74,7 @@ struct PreviewSettingsTab: View {
                 }
 
                 HStack {
-                    Text("Toggle Hide All Previews")
+                    Text("Toggle hiding all previews")
                     Spacer()
                     KeyboardShortcuts.Recorder("", name: .toggleHideAllPreviews)
                 }
