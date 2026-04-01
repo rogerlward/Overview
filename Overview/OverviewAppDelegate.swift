@@ -36,7 +36,8 @@ final class OverviewAppDelegate: NSObject, NSApplicationDelegate {
             permissionManager: permissionManager
         )
         shortcutManager = ShortcutManager(
-            sourceManager: sourceManager
+            sourceManager: sourceManager,
+            previewManager: previewManager
         )
         settingsManager = SettingsManager(
             updateManager: updateManager,

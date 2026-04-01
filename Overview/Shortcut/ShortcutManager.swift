@@ -13,6 +13,7 @@ import SwiftUI
 final class ShortcutManager: ObservableObject {
     // Dependencies
     private var sourceManager: SourceManager
+    private var previewManager: PreviewManager
     private let logger = AppLogger.shortcuts
 
     // Published State
@@ -21,13 +22,16 @@ final class ShortcutManager: ObservableObject {
     // Private State
     private var cancellables = Set<AnyCancellable>()
 
-    init(sourceManager: SourceManager) {
+    init(sourceManager: SourceManager, previewManager: PreviewManager) {
         self.sourceManager = sourceManager
+        self.previewManager = previewManager
         self.shortcutStorage = ShortcutStorage()
         setupShortcuts()
     }
 
     private func setupShortcuts() {
+        setupHideAllPreviewsShortcut()
+
         shortcutStorage.shortcuts.forEach { shortcut in
             if shortcut.isEnabled {
                 setupShortcutObserver(for: shortcut)
@@ -52,6 +56,14 @@ final class ShortcutManager: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+    }
+
+    private func setupHideAllPreviewsShortcut() {
+        KeyboardShortcuts.onKeyDown(for: .toggleHideAllPreviews) { [weak self] in
+            Task { @MainActor in
+                self?.previewManager.hideAllPreviews.toggle()
+            }
+        }
     }
 
     private func setupShortcutObserver(for shortcut: Shortcut) {
@@ -148,6 +160,7 @@ final class ShortcutManager: ObservableObject {
     func resetShortcuts() {
         logger.debug("Resetting shortcut manager")
         shortcutStorage.resetToDefaults()
+        KeyboardShortcuts.reset(.toggleHideAllPreviews)
         self.objectWillChange.send()
         logger.info("Shortcut manager reset completed")
     }
