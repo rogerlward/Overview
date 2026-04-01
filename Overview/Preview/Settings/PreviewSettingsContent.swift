@@ -23,8 +23,8 @@ extension InfoPopoverContent {
         isWarning: true
     )
 
-    static let autoHiding = InfoPopoverContent(
-        title: "Automatic Preview Hiding",
+    static let previewHiding = InfoPopoverContent(
+        title: "Preview Hiding",
         sections: [
             Section(
                 title: "Hide Previews for Inactive Source Applications",
@@ -35,6 +35,11 @@ extension InfoPopoverContent {
                 title: "Hide Preview for Focused Source Window",
                 text:
                     "Automatically hides the preview window when its source window is focused.\nIn conjunction with this setting, two previews can be placed on top of one another, and used to switch back and forth between two applications while only ever seeing the preview of the inactive one."
+            ),
+            Section(
+                title: "Toggle Hide All Previews",
+                text:
+                    "Set a global keyboard shortcut to quickly toggle the Hide All Previews state. This allows you to instantly hide all preview windows and reveal them again without navigating to the menu bar."
             ),
         ],
         isWarning: false

@@ -11,6 +11,7 @@ import KeyboardShortcuts
 
 extension KeyboardShortcuts.Name {
     static let focusSelectedWindow = Self("focusSelectedWindow")
+    static let toggleHideAllPreviews = Self("toggleHideAllPreviews")
 }
 
 extension KeyboardShortcuts.Name: Codable {

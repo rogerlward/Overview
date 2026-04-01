@@ -6,6 +6,7 @@
 */
 
 import Defaults
+import KeyboardShortcuts
 import SwiftUI
 
 struct PreviewSettingsTab: View {
@@ -15,7 +16,7 @@ struct PreviewSettingsTab: View {
 
     // Private State
     @State private var showingFrameRateInfo: Bool = false
-    @State private var showingAutoHidingInfo: Bool = false
+    @State private var showingPreviewHidingInfo: Bool = false
 
     // Preview Settings
     @Default(.captureFrameRate) private var captureFrameRate
@@ -46,16 +47,16 @@ struct PreviewSettingsTab: View {
                 .pickerStyle(.segmented)
             }
 
-            // MARK: - Auto Hiding Section
+            // MARK: - Preview Hiding Section
 
             Section {
                 HStack {
-                    Text("Automatic Hiding")
+                    Text("Preview Hiding")
                         .font(.headline)
                     Spacer()
                     InfoPopover(
-                        content: .autoHiding,
-                        isPresented: $showingAutoHidingInfo
+                        content: .previewHiding,
+                        isPresented: $showingPreviewHidingInfo
                     )
                 }
                 .padding(.bottom, 4)
@@ -70,6 +71,12 @@ struct PreviewSettingsTab: View {
                         "Hide preview for focused source window",
                         key: .hideActiveWindow
                     )
+                }
+
+                HStack {
+                    Text("Toggle Hide All Previews")
+                    Spacer()
+                    KeyboardShortcuts.Recorder("", name: .toggleHideAllPreviews)
                 }
             }
         }
